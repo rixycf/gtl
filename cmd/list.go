@@ -26,7 +26,7 @@ func list(c *cli.Context) error {
 	todos := readList(`./test.json`)
 
 	for num, todo := range todos {
-		fmt.Println(num, todo.Todo)
+		fmt.Println(num, todo.Todo, todo.Done)
 	}
 	fmt.Println(todos)
 	return nil

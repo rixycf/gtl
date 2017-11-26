@@ -22,10 +22,12 @@ func add(c *cli.Context) error {
 
 	todos := readList("./test.json")
 
+	var label int = len(todos)
 	// add todo to todo.List
-	for _, task := range tasks {
+	for i, task := range tasks {
 		var t todo.List
 		t.Todo = task
+		t.Id = label + i
 		todos = append(todos, t)
 	}
 

@@ -22,6 +22,8 @@ func main() {
 	app.Commands = []cli.Command{
 		cmd.Add,
 		cmd.List,
+		cmd.Done,
+		cmd.Remove,
 	}
 
 	app.Run(os.Args)
