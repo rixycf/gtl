@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"os"
 
 	"github.com/rixycf/gtd/cmd"
@@ -13,7 +12,6 @@ const (
 )
 
 func main() {
-	fmt.Println("hello")
 	app := cli.NewApp()
 	app.Name = "gtd"
 	app.Version = Version
