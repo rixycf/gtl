@@ -1,6 +1,8 @@
 package cmd
 
 import (
+	"fmt"
+
 	"github.com/rixycf/gtd/todo"
 	"github.com/urfave/cli"
 )
@@ -8,8 +10,14 @@ import (
 // Add define add command
 var Add = cli.Command{
 	Name:   "add",
-	Usage:  "add todo",
+	Usage:  "add task",
 	Action: add,
+	Flags: []cli.Flag{
+		cli.StringSliceFlag{
+			Name:  "p, process",
+			Usage: "this option can write processes for task",
+		},
+	},
 }
 
 func add(c *cli.Context) error {
@@ -27,9 +35,13 @@ func add(c *cli.Context) error {
 	for i, task := range tasks {
 		var t todo.List
 		t.Todo = task
-		t.Id = label + i
+		t.Id = label + i + 1
 		todos = append(todos, t)
+
+		fmt.Printf(" Add task: %v\n", task)
 	}
+
+	fmt.Println(c.StringSlice("p"))
 
 	writeList("./test.json", todos)
 	return nil

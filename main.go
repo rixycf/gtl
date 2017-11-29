@@ -3,7 +3,7 @@ package main
 import (
 	"os"
 
-	"github.com/rixycf/gtd/cmd"
+	"github.com/rixycf/gtd/command"
 	"github.com/urfave/cli"
 )
 

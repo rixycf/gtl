@@ -21,7 +21,7 @@ func done(c *cli.Context) error {
 
 	// read todolist
 	todos := readList("./test.json")
-	fmt.Println(todos)
+	//fmt.Println(todos)
 
 	// check todoList
 	for _, id := range ids {
@@ -30,7 +30,13 @@ func done(c *cli.Context) error {
 			return err
 		}
 
-		todos[id].Done = true
+		if todos[id].Done == false {
+			todos[id].Done = true
+			fmt.Printf(" Done %v\n", todos[id].Todo)
+		} else {
+			todos[id].Done = false
+			fmt.Printf(" UnDone %v\n", todos[id].Todo)
+		}
 	}
 
 	writeList("./test.json", todos)
