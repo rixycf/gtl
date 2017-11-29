@@ -15,6 +15,9 @@ var Remove = cli.Command{
 
 func remove(c *cli.Context) error {
 
+	//TODO fix!
+	//TODO remove todo function
+
 	// get id to remove todo
 	ids := c.Args()
 

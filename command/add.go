@@ -17,13 +17,14 @@ var Add = cli.Command{
 			Name:  "p, process",
 			Usage: "this option can write processes for task",
 		},
+		cli.IntFlag{
+			Name:  "i, id",
+			Usage: "this option specify ID to add processes",
+		},
 	},
 }
 
 func add(c *cli.Context) error {
-
-	// TODO get command line argment
-	// TODO assign todo.List
 
 	// get todo from commanline argment
 	tasks := c.Args()
@@ -31,7 +32,8 @@ func add(c *cli.Context) error {
 	todos := readList("./test.json")
 
 	var label int = len(todos)
-	// add todo to todo.List
+
+	// add task to todo.List
 	for i, task := range tasks {
 		var t todo.List
 		t.Todo = task
@@ -41,7 +43,18 @@ func add(c *cli.Context) error {
 		fmt.Printf(" Add task: %v\n", task)
 	}
 
-	fmt.Println(c.StringSlice("p"))
+	// option "-i"
+	var id int = c.Int("i")
+	if id > 0 {
+		if len(todos) < id {
+			fmt.Println("wrong id")
+			return nil
+		}
+
+		for _, p := range c.StringSlice("p") {
+			todos[id-1].Proc = append(todos[id-1].Proc, p)
+		}
+	}
 
 	writeList("./test.json", todos)
 	return nil
