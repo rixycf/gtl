@@ -26,16 +26,21 @@ func done(c *cli.Context) error {
 
 	// check todoList
 	for _, id := range ids {
+
 		id, err := strconv.Atoi(id)
 		if err != nil {
 			return err
 		}
 
-		if todos[id].Done == false {
-			todos[id].Done = true
+		if id > len(todos) {
+			return nil
+		}
+
+		if todos[id-1].Done == false {
+			todos[id-1].Done = true
 			fmt.Printf(" Done %v\n", todos[id-1].Todo)
 		} else {
-			todos[id].Done = false
+			todos[id-1].Done = false
 			fmt.Printf(" UnDone %v\n", todos[id-1].Todo)
 		}
 	}
