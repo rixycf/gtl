@@ -1,12 +1,14 @@
 package cmd
 
 import (
+	"fmt"
 	"strconv"
 
 	"github.com/rixycf/gtd/todo"
 	"github.com/urfave/cli"
 )
 
+// Remove define "remove" subcommand
 var Remove = cli.Command{
 	Name:   "remove",
 	Usage:  "remove todo from List",
@@ -20,31 +22,23 @@ func remove(c *cli.Context) error {
 
 	// get id to remove todo
 	ids := c.Args()
+	fmt.Printf("%+v", ids)
 
 	// read todoList
 	todos := readList("./test.json")
 
 	// remove todo
-	// for _, id := range ids {
-	// 	id, err := strconv.Atoi(id)
-	// 	if err != nil {
-	// 		return err
-	// 	}
-	//
-	// 	todos = rmSlice(id, todos)
-	// }
-
-	for _, todo := range todos {
-		for _, id := range ids {
-			id, err := strconv.Atoi(id)
-			if err != nil {
-				return err
-			}
-
-			if todo.Id == id {
-				todos = rmSlice(id, todos)
-			}
+	for i, id := range ids {
+		id, err := strconv.Atoi(id)
+		if err != nil {
+			return err
 		}
+
+		todos = rmSlice(id-i-1, todos)
+	}
+
+	for i := 0; i < len(todos); i++ {
+		todos[i].Id = i + 1
 	}
 	//write todoList
 	writeList("./test.json", todos)

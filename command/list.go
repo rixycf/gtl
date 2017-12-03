@@ -3,60 +3,88 @@ package cmd
 import (
 	"fmt"
 	"os"
-	_ "path/filepath"
+	"path/filepath"
+	"strconv"
 
+	"github.com/fatih/color"
 	"github.com/olekukonko/tablewriter"
-	_ "github.com/rixycf/gtd/todo"
+	"github.com/rixycf/gtd/todo"
 	"github.com/urfave/cli"
 )
 
+// List define list subcommand
 var List = cli.Command{
 	Name:   "list",
 	Usage:  "show todo list",
 	Action: list,
+	Flags: []cli.Flag{
+		cli.BoolFlag{
+			Name:  "detail, d",
+			Usage: "detail todo list",
+		},
+	},
 }
 
 func list(c *cli.Context) error {
 	fmt.Println("list is working")
 
-	// TODO output ASCII Table
 	todos := readList(`./test.json`)
+
+	detail := c.Bool("d")
+	fmt.Println(detail)
+
+	if detail == true {
+		detailTodo(todos)
+	} else {
+		makeTable(todos)
+	}
+
+	return nil
+}
+
+func detailTodo(todos []todo.List) {
 
 	for _, todo := range todos {
 		var check string
 		if todo.Done == true {
-			check = "○"
+			check = "[ok]"
 		} else {
-			check = "×"
+			check = "[  ]"
 		}
-		fmt.Printf("%v  %v  -> %v\n", check, todo.Id, todo.Todo)
+		color.Cyan(" %v %v -> %v", check, todo.Id, todo.Todo)
+		if len(todo.Proc) != 0 {
+			for _, proc := range todo.Proc {
+				fmt.Printf("\t-> %v\n", proc)
+			}
+		}
 	}
+}
+
+func makeTable(todos []todo.List) {
 
 	data := make([][]string, 0)
 
 	for _, todo := range todos {
 		var check string
 		if todo.Done == true {
-			check = "ok"
+			check = "  ok  "
 		} else {
-			check = "no"
+			check = "  -  "
 		}
 
 		//var row []string = {todo.check,todo.Id,todo.Todo}
 		row := make([]string, 3)
 		row[0] = check
-		row[1] = ""
+		row[1] = strconv.Itoa(todo.Id)
 		row[2] = todo.Todo
 		data = append(data, row)
 	}
 
 	table := tablewriter.NewWriter(os.Stdout)
-	table.SetHeader([]string{"  Done  ", "  ID  ", "  Todo  "})
+	table.SetHeader([]string{"Done", "  ID  ", "  Todo  "})
 
 	for _, v := range data {
 		table.Append(v)
 	}
 	table.Render() // Send output
-
-	return nil
 }

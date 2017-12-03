@@ -31,7 +31,7 @@ func add(c *cli.Context) error {
 
 	todos := readList("./test.json")
 
-	var label int = len(todos)
+	var label = len(todos)
 
 	// add task to todo.List
 	for i, task := range tasks {
@@ -44,7 +44,7 @@ func add(c *cli.Context) error {
 	}
 
 	// option "-i"
-	var id int = c.Int("i")
+	var id = c.Int("i")
 	if id > 0 {
 		if len(todos) < id {
 			fmt.Println("wrong id")

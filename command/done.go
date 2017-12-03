@@ -7,6 +7,7 @@ import (
 	"github.com/urfave/cli"
 )
 
+// Done define done subcommand
 var Done = cli.Command{
 	Name:   "done",
 	Usage:  "check todo",
@@ -32,10 +33,10 @@ func done(c *cli.Context) error {
 
 		if todos[id].Done == false {
 			todos[id].Done = true
-			fmt.Printf(" Done %v\n", todos[id].Todo)
+			fmt.Printf(" Done %v\n", todos[id-1].Todo)
 		} else {
 			todos[id].Done = false
-			fmt.Printf(" UnDone %v\n", todos[id].Todo)
+			fmt.Printf(" UnDone %v\n", todos[id-1].Todo)
 		}
 	}
 
