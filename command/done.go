@@ -10,7 +10,7 @@ import (
 // Done define done subcommand
 var Done = cli.Command{
 	Name:   "done",
-	Usage:  "check todo",
+	Usage:  "check off todo",
 	Action: done,
 }
 

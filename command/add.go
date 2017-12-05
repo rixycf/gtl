@@ -3,7 +3,7 @@ package cmd
 import (
 	"fmt"
 
-	"github.com/rixycf/gtd/todo"
+	"github.com/rixycf/gtl/todo"
 	"github.com/urfave/cli"
 )
 
@@ -26,10 +26,19 @@ var Add = cli.Command{
 
 func add(c *cli.Context) error {
 
-	// get todo from commanline argment
-	tasks := c.Args()
+	path, err := getPath()
+	fmt.Println(path)
+	if err != nil {
+		return err
+	}
 
-	todos := readList("./test.json")
+	// get task from commanline argment
+	tasks := c.Args()
+	for _, task := range tasks {
+		fmt.Println(task)
+	}
+
+	todos := readList(path)
 
 	var label = len(todos)
 
@@ -46,6 +55,7 @@ func add(c *cli.Context) error {
 	// option "-i"
 	var id = c.Int("i")
 	if id > 0 {
+
 		if len(todos) < id {
 			fmt.Println("wrong id")
 			return nil
@@ -56,6 +66,6 @@ func add(c *cli.Context) error {
 		}
 	}
 
-	writeList("./test.json", todos)
+	writeList(path, todos)
 	return nil
 }

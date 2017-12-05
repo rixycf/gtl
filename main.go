@@ -3,7 +3,7 @@ package main
 import (
 	"os"
 
-	"github.com/rixycf/gtd/command"
+	"github.com/rixycf/gtl/command"
 	"github.com/urfave/cli"
 )
 
@@ -25,6 +25,5 @@ func main() {
 		cmd.Done,
 		cmd.Remove,
 	}
-
 	app.Run(os.Args)
 }

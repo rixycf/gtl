@@ -7,7 +7,7 @@ import (
 
 	"github.com/fatih/color"
 	"github.com/olekukonko/tablewriter"
-	"github.com/rixycf/gtd/todo"
+	"github.com/rixycf/gtl/todo"
 	"github.com/urfave/cli"
 )
 
@@ -25,10 +25,8 @@ var List = cli.Command{
 }
 
 func list(c *cli.Context) error {
-	fmt.Println("list is working")
 
 	todos := readList(`./test.json`)
-
 	detail := c.Bool("d")
 	fmt.Println(detail)
 

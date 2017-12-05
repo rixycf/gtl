@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/rixycf/gtd/todo"
+	"github.com/rixycf/gtl/todo"
 	"github.com/urfave/cli"
 )
 
@@ -16,9 +16,6 @@ var Remove = cli.Command{
 }
 
 func remove(c *cli.Context) error {
-
-	//TODO fix!
-	//TODO remove todo function
 
 	// get id to remove todo
 	ids := c.Args()
