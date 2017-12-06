@@ -3,11 +3,11 @@ glt
 
 make todo list
 
-##Description
+## Description
 **glt** is cli tool. it can make TODO LIST. 
 
-##Demo
+## Demo
 
-##Usage
+## Usage
 glt add \<task\>
 
