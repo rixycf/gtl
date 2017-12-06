@@ -16,7 +16,7 @@ func main() {
 	app.Name = "gtd"
 	app.Version = Version
 	app.Usage = "make todo list"
-	app.Author = "riki kaida"
+	app.Author = "riki"
 	app.Email = "kasnake1013@gmail.com"
 
 	app.Commands = []cli.Command{

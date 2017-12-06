@@ -19,9 +19,12 @@ func done(c *cli.Context) error {
 
 	// get id to check TODOList
 	ids := c.Args()
-
+	path, err := getPath()
+	if err != nil {
+		return err
+	}
 	// read todolist
-	todos := readList("./test.json")
+	todos := readList(path)
 	//fmt.Println(todos)
 
 	// check todoList
@@ -45,7 +48,7 @@ func done(c *cli.Context) error {
 		}
 	}
 
-	writeList("./test.json", todos)
+	writeList(path, todos)
 
 	return nil
 }

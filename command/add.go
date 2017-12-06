@@ -34,9 +34,6 @@ func add(c *cli.Context) error {
 
 	// get task from commanline argment
 	tasks := c.Args()
-	for _, task := range tasks {
-		fmt.Println(task)
-	}
 
 	todos := readList(path)
 

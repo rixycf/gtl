@@ -19,10 +19,12 @@ func remove(c *cli.Context) error {
 
 	// get id to remove todo
 	ids := c.Args()
-	fmt.Printf("%+v", ids)
-
+	path, err := getPath()
+	if err != nil {
+		return err
+	}
 	// read todoList
-	todos := readList("./test.json")
+	todos := readList(path)
 
 	// remove todo
 	for i, id := range ids {
@@ -31,6 +33,12 @@ func remove(c *cli.Context) error {
 			return err
 		}
 
+		if id < 1 || id > len(todos)-i {
+			fmt.Println(" wrong id ")
+			return nil
+		}
+
+		fmt.Println("remove task: ", todos[id-1].Todo)
 		todos = rmSlice(id-i-1, todos)
 	}
 
@@ -38,7 +46,7 @@ func remove(c *cli.Context) error {
 		todos[i].Id = i + 1
 	}
 	//write todoList
-	writeList("./test.json", todos)
+	writeList(path, todos)
 	return nil
 }
 

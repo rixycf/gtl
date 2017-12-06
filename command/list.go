@@ -26,9 +26,14 @@ var List = cli.Command{
 
 func list(c *cli.Context) error {
 
-	todos := readList(`./test.json`)
+	path, err := getPath()
+	if err != nil {
+		return err
+	}
+
+	todos := readList(path)
+
 	detail := c.Bool("d")
-	fmt.Println(detail)
 
 	if detail == true {
 		detailTodo(todos)
