@@ -27,7 +27,7 @@ var Add = cli.Command{
 func add(c *cli.Context) error {
 
 	path, err := getPath()
-	fmt.Println(path)
+
 	if err != nil {
 		return err
 	}
