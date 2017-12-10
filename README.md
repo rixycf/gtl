@@ -4,10 +4,11 @@ gtl
 make todo list
 
 ### Description
-**gtl** is command line tool. It can make a todo listand write a process below TODO. **gtl** save TODO List in JSON file. It is put in the current directory.
+**gtl** is command line tool. It can make a todo list and write a process below TODO. **gtl** save TODO List in JSON file. It is put in the current directory.
 
 ### Demo
-
+![gtl_add](https://github.com/rixycf/gtl/blob/media/images/gtl_add.gif)  
+![gtl_done](https://github.com/rixycf/gtl/blob/media/images/gtl_done.gif)  
 
 ### Usage
 add task  
