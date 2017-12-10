@@ -10,6 +10,6 @@ func getPath() (string, error) {
 	if err != nil {
 		return "", err
 	}
-	path := filepath.Join(dir, "test.json")
+	path := filepath.Join(dir, "gtl_todo.json")
 	return path, nil
 }
